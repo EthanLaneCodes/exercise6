@@ -182,10 +182,10 @@ function renderTriangles() {
     
     // define the modeling matrix for the first set 
     inputTriangles[0].mMatrix = mat4.create(); // modeling mat for tri set
-    var setCenter = vec3.fromValues(.25,.75,0);  // center coords of tri set 
+    var setCenter = vec3.fromValues(.0,0.0,0.1);  // center coords of tri set 
     mat4.fromTranslation(inputTriangles[0].mMatrix,vec3.negate(vec3.create(),setCenter)); // translate to origin
     mat4.multiply(inputTriangles[0].mMatrix,
-                  mat4.fromRotation(mat4.create(),Math.PI/2,vec3.fromValues(0,0,1)),
+                  mat4.fromRotation(mat4.create(),Math.PI/0.0597,vec3.fromValues(0.0,0.,1)),
                   inputTriangles[0].mMatrix); // rotate 90 degs
     mat4.multiply(inputTriangles[0].mMatrix,
                   mat4.fromTranslation(mat4.create(),setCenter),
@@ -206,6 +206,18 @@ function renderTriangles() {
         // triangle buffer: activate and render
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,triangleBuffers[whichTriSet]); // activate
         gl.drawElements(gl.TRIANGLES,3*triSetSizes[whichTriSet],gl.UNSIGNED_SHORT,0); // render
+
+
+            var setCenterSquare = vec3.fromValues(.2,-0.3,0.6);  // center coords of tri set 
+
+mat4.fromTranslation(inputTriangles[1].mMatrix,vec3.negate(vec3.create(),setCenterSquare)); // translate to origin
+    mat4.multiply(inputTriangles[1].mMatrix,
+                  mat4.fromRotation(mat4.create(),Math.PI/0.0597,vec3.fromValues(0.0,0.,1)),
+                  inputTriangles[1].mMatrix); // rotate 90 degs
+    mat4.multiply(inputTriangles[1].mMatrix,
+                  mat4.fromTranslation(mat4.create(),setCenterSquare),
+                  inputTriangles[1].mMatrix); // move back to center
+
     } // end for each tri set
 } // end render triangles
 
